@@ -18,7 +18,7 @@ Gafasfy/
 
 ## 🛠️ Stack Tecnológico
 
-### Backend
+### Backend Stack
 
 - **Java 21**
 - **Spring Boot 3.5.5** — Framework principal
@@ -28,7 +28,7 @@ Gafasfy/
 - **MySQL 8** — Base de datos relacional
 - **Maven** — Gestión de dependencias
 
-### Frontend
+### Frontend Stack
 
 - **React 19** — Biblioteca principal de UI
 - **Vite 7** — Build tool y servidor de desarrollo
@@ -92,7 +92,7 @@ Gafasfy/
 
    El servidor arrancará en `http://localhost:8080`.
 
-### Frontend
+### Frontend Structure
 
 1. Instalar dependencias:
 
@@ -173,7 +173,7 @@ El campo `timestamp` es `insertable = false, updatable = false`, por lo que lo g
 
 ## 📦 Scripts disponibles
 
-### Backend
+### Backend Scripts
 
 ```bash
 mvn clean package          # Compilar y empaquetar
@@ -194,7 +194,7 @@ npm run lint       # Linting con ESLint
 
 ## 📁 Estructura detallada
 
-### Backend
+### Backend estructura
 
 ```Estructura
 backend/src/main/java/net/ddns/deveps/gafas/
@@ -218,7 +218,7 @@ backend/src/main/java/net/ddns/deveps/gafas/
         └── PhotoServiceImpl.java
 ```
 
-### Frontend
+### Frontend estructura
 
 ```Estructura
 frontend/src/
