@@ -1,0 +1,249 @@
+# 🤓 Gafas Viajeras del Mundo
+
+Aplicación web full-stack que permite documentar y compartir las aventuras de unas gafas que viajan por el mundo. Los usuarios pueden capturar fotos con la cámara de su dispositivo, añadir su nombre, un comentario y su ubicación GPS, y ver las aventuras de otros viajeros en una galería.
+
+🌐 **Demo en producción:** [deveps.ddns.net/gafasviajeras](https://deveps.ddns.net/gafasviajeras)
+
+---
+
+## 📁 Estructura del Repositorio
+
+```Estructura
+Gafasfy/
+├── backend/    # API REST con Spring Boot
+└── frontend/   # Interfaz de usuario con React + Vite
+```
+
+---
+
+## 🛠️ Stack Tecnológico
+
+### Backend
+
+- **Java 21**
+- **Spring Boot 3.5.5** — Framework principal
+- **Spring Data JPA + Hibernate** — Persistencia de datos
+- **MapStruct 1.5.5** — Mapeo automático entre entidades y DTOs
+- **Lombok** — Reducción de código boilerplate
+- **MySQL 8** — Base de datos relacional
+- **Maven** — Gestión de dependencias
+
+### Frontend
+
+- **React 19** — Biblioteca principal de UI
+- **Vite 7** — Build tool y servidor de desarrollo
+- **Tailwind CSS 4** — Framework CSS utility-first
+- **Lucide React** — Iconos
+- **MediaDevices API** — Acceso a la cámara del dispositivo
+- **Geolocation API** — Captura de coordenadas GPS
+
+---
+
+## 🚀 Características
+
+- 📸 **Cámara en tiempo real** con cambio entre cámara frontal y trasera
+- 🌍 **Geolocalización automática** al subir una foto
+- 🖼️ **Galería de aventuras** con las fotos más recientes
+- 🌐 **Multiidioma** — Detección automática de español/inglés
+- 🎨 **Animaciones fluidas** — Partículas flotantes, gradientes dinámicos, efectos hover
+- 💫 **Glassmorphism** y diseño responsive para todos los dispositivos
+- ✅ **Validación de archivos** — Acepta JPEG, PNG, GIF, WebP (máximo 10 MB)
+
+---
+
+## ⚙️ Instalación y Configuración
+
+### Prerrequisitos
+
+- Java 21+
+- Maven 3.8+
+- Node.js 18+
+- MySQL 8+
+
+### Backend
+
+1. Crear la base de datos en MySQL:
+
+   ```sql
+   CREATE DATABASE gafas;
+   ```
+
+2. Configurar `backend/src/main/resources/application.properties`:
+
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/gafas
+   spring.datasource.username=tu_usuario
+   spring.datasource.password=tu_password
+   spring.jpa.hibernate.ddl-auto=update
+
+   spring.servlet.multipart.max-file-size=10MB
+   spring.servlet.multipart.max-request-size=10MB
+
+   file.upload.dir=${user.home}/photos
+   ```
+
+3. Compilar y ejecutar:
+
+   ```bash
+   cd backend
+   mvn clean install
+   mvn spring-boot:run
+   ```
+
+   El servidor arrancará en `http://localhost:8080`.
+
+### Frontend
+
+1. Instalar dependencias:
+
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+2. Ejecutar en desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+
+   La aplicación estará disponible en `http://localhost:5173`.
+
+> **Nota:** La URL de la API está configurada directamente en el código del frontend apuntando a `https://deveps.ddns.net/api/gafasviajeras`. Para apuntar a un backend local, modifica las llamadas `fetch` en `src/pages/HomePage.jsx` y `src/components/PhotoUploadForm.jsx`.
+
+---
+
+## 📡 API Endpoints
+
+Base URL: `/api/photos`
+
+| Método   | Endpoint              | Descripción                          |
+| -------- | --------------------- | ------------------------------------ |
+| `GET`    | `/api/photos`         | Obtener todas las fotos              |
+| `GET`    | `/api/photos/{id}`    | Obtener una foto por ID              |
+| `GET`    | `/api/photos/recent`  | Obtener fotos recientes (`?limit=4`) |
+| `POST`   | `/api/photos/upload`  | Subir una nueva foto (multipart)     |
+| `POST`   | `/api/photos`         | Crear una foto mediante JSON         |
+| `PUT`    | `/api/photos/{id}`    | Actualizar una foto existente        |
+| `DELETE` | `/api/photos/{id}`    | Eliminar una foto                    |
+
+### Ejemplo — Subir una foto
+
+```bash
+curl -X POST "http://localhost:8080/api/photos/upload" \
+  -F "photo=@imagen.jpg" \
+  -F "name=Juan Pérez" \
+  -F "comment=¡Las gafas en París!" \
+  -F "lat=48.8566" \
+  -F "len=2.3522"
+```
+
+### Ejemplo — Respuesta
+
+```json
+{
+  "id": 1,
+  "url": "a1b2c3d4_1706000000000_imagen.jpg",
+  "name": "Juan Pérez",
+  "comment": "¡Las gafas en París!",
+  "lat": 48.8566,
+  "len": 2.3522
+}
+```
+
+---
+
+## 🗄️ Modelo de Datos
+
+### Entidad `Photo` (tabla `photos`)
+
+| Campo       | Tipo            | Descripción                                |
+| ----------- | --------------- | ------------------------------------------ |
+| `id`        | `Long`          | Clave primaria, auto-generada              |
+| `url`       | `String`        | Nombre del archivo guardado en disco       |
+| `timestamp` | `LocalDateTime` | Fecha de subida, gestionada por la BD      |
+| `name`      | `String`        | Nombre del usuario (opcional)              |
+| `comment`   | `String`        | Comentario del usuario (opcional)          |
+| `lat`       | `double`        | Latitud GPS                                |
+| `len`       | `double`        | Longitud GPS                               |
+
+El campo `timestamp` es `insertable = false, updatable = false`, por lo que lo gestiona directamente la base de datos.
+
+---
+
+## 📦 Scripts disponibles
+
+### Backend
+
+```bash
+mvn clean package          # Compilar y empaquetar
+mvn test                   # Ejecutar tests
+java -jar target/*.jar     # Ejecutar el JAR generado
+```
+
+### Frontend
+
+```bash
+npm run dev        # Servidor de desarrollo
+npm run build      # Build para producción (genera /dist)
+npm run preview    # Preview del build de producción
+npm run lint       # Linting con ESLint
+```
+
+---
+
+## 📁 Estructura detallada
+
+### Backend
+
+```Estructura
+backend/src/main/java/net/ddns/deveps/gafas/
+├── GafasApplication.java
+├── config/
+│   └── WebConfig.java              # CORS y recursos estáticos
+├── controllers/
+│   └── PhotoController.java        # Endpoints REST
+├── dto/
+│   └── PhotoDTO.java
+├── entities/
+│   └── Photo.java
+├── mappers/
+│   └── PhotoMapper.java            # MapStruct
+├── repositories/
+│   └── PhotoRepository.java
+└── services/
+    ├── FileStorageService.java     # Manejo de archivos en disco
+    ├── PhotoService.java
+    └── impl/
+        └── PhotoServiceImpl.java
+```
+
+### Frontend
+
+```Estructura
+frontend/src/
+├── components/
+│   ├── CameraPreview.jsx           # Captura desde cámara
+│   ├── FloatingParticles.jsx       # Fondo animado decorativo
+│   ├── PhotoCard.jsx               # Tarjeta individual de foto
+│   └── PhotoUploadForm.jsx         # Formulario de subida
+├── pages/
+│   ├── HomePage.jsx                # Galería de aventuras
+│   └── UploadPage.jsx              # Página de subida
+├── App.jsx                         # Enrutamiento y traducciones
+├── main.jsx                        # Punto de entrada
+└── index.css                       # Estilos base y animaciones
+```
+
+---
+
+## 👨‍💻 Autor
+
+**deveps** — Desarrollo Full Stack
+
+- GitHub: [@devepsdev](https://github.com/devepsdev)
+- Portfolio: [deveps.ddns.net](https://deveps.ddns.net)
+
+---
+
+⭐ ¡Dale una estrella si el proyecto te ha resultado útil!
