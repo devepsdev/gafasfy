@@ -239,10 +239,12 @@ frontend/src/
 
 ## 👨‍💻 Autor
 
-**deveps** — Desarrollo Full Stack
+**DevEps** - Desarrollador Full Stack
 
-- GitHub: [@devepsdev](https://github.com/devepsdev)
+- GitHub: [github.com/devepsdev](https://github.com/devepsdev)
 - Portfolio: [deveps.ddns.net](https://deveps.ddns.net)
+- Email: devepsdev@gmail.com
+- LinkedIn: [www.linkedin.com/in/enrique-perez-sanchez](https://www.linkedin.com/in/enrique-perez-sanchez/)
 
 ---
 
