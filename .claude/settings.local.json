@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./mvnw test -q)",
+      "Bash(./mvnw test)",
+      "Bash(npm install)",
+      "Bash(npm run test:run)"
+    ]
+  }
+}

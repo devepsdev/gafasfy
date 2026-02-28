@@ -171,13 +171,54 @@ El campo `timestamp` es `insertable = false, updatable = false`, por lo que lo g
 
 ---
 
+## 🧪 Tests
+
+### Backend — JUnit 5 + Mockito + H2
+
+Los tests se ejecutan con H2 en memoria (perfil `test`) sin necesidad de MySQL.
+
+| Clase de test | Tipo | Cobertura |
+| --- | --- | --- |
+| `PhotoServiceImplTest` | Unitario | `findAll`, `findById`, `save`, `deleteById`, `updatePhoto` |
+| `FileStorageServiceTest` | Unitario | `saveFile`, `deleteFile`, `fileExists`, `getFilePath`, `getUploadDir` |
+| `PhotoMapperTest` | Unitario | `toDTO`, `toEntity`, `toDTOList`, `toEntityList` (MapStruct) |
+| `PhotoControllerTest` | Unitario (MockMvc) | Todos los endpoints REST con servicios mockeados |
+| `PhotoControllerIntegrationTest` | Integración (H2) | Ciclos completos CRUD + upload sobre BD real |
+| `GafasApplicationTests` | Integración | Carga del contexto de Spring |
+
+```bash
+cd backend
+mvn test                   # Ejecutar todos los tests (52 tests)
+mvn test -pl . -Dtest=PhotoServiceImplTest   # Ejecutar test específico
+```
+
+### Frontend — Vitest + React Testing Library
+
+| Archivo de test | Componente/Página | Cobertura |
+| --- | --- | --- |
+| `FloatingParticles.test.jsx` | `FloatingParticles` | Renderizado, partículas, clases CSS |
+| `PhotoCard.test.jsx` | `PhotoCard` | Datos completos, valores nulos, coordenadas |
+| `PhotoUploadForm.test.jsx` | `PhotoUploadForm` | Pasos del formulario, navegación, envío |
+| `HomePage.test.jsx` | `HomePage` | API fetch, estado de carga, navegación |
+| `UploadPage.test.jsx` | `UploadPage` | Renderizado, navegación |
+| `App.test.jsx` | `App` + `useLanguage` | Hook de idioma, navegación entre páginas |
+
+```bash
+cd frontend
+npm test           # Modo watch interactivo
+npm run test:run   # Ejecución única (47 tests)
+npm run coverage   # Cobertura de código
+```
+
+---
+
 ## 📦 Scripts disponibles
 
 ### Backend Scripts
 
 ```bash
 mvn clean package          # Compilar y empaquetar
-mvn test                   # Ejecutar tests
+mvn test                   # Ejecutar tests (52 tests, H2 en memoria)
 java -jar target/*.jar     # Ejecutar el JAR generado
 ```
 
@@ -188,6 +229,8 @@ npm run dev        # Servidor de desarrollo
 npm run build      # Build para producción (genera /dist)
 npm run preview    # Preview del build de producción
 npm run lint       # Linting con ESLint
+npm run test:run   # Ejecutar tests (47 tests)
+npm run coverage   # Informe de cobertura
 ```
 
 ---
