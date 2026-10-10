@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-    @Value("${file.upload.dir:#{systemProperties['user.home']}/photos}")
+    @Value("${file.upload.dir:#{systemProperties['user.home']}/Imágenes/gafasviajeras}")
     private String uploadDir;
 
     @Override

@@ -14,7 +14,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileStorageService {
 
-    @Value("${file.upload.dir:#{systemProperties['user.home']}/photos}")
+    @Value("${file.upload.dir:#{systemProperties['user.home']}/Imágenes/gafasviajeras}")
     private String uploadDir;
 
     public FileStorageService() {
