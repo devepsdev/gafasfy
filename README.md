@@ -73,19 +73,22 @@ Gafasfy/
    ```properties
    spring.datasource.url=jdbc:mysql://localhost:3306/gafas
    spring.datasource.username=tu_usuario
-   spring.datasource.password=tu_password
+   spring.datasource.password=${DB_PASSWORD}
    spring.jpa.hibernate.ddl-auto=update
 
    spring.servlet.multipart.max-file-size=10MB
    spring.servlet.multipart.max-request-size=10MB
 
-   file.upload.dir=${user.home}/photos
+   file.upload.dir=${user.home}/Imágenes/gafasviajeras
    ```
+
+   La contraseña de MySQL no se guarda en el repositorio: se lee de la variable de entorno `DB_PASSWORD`.
 
 3. Compilar y ejecutar:
 
    ```bash
    cd backend
+   export DB_PASSWORD=tu_password
    mvn clean install
    mvn spring-boot:run
    ```
