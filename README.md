@@ -2,7 +2,6 @@
 
 Aplicación web full-stack que permite documentar y compartir las aventuras de unas gafas que viajan por el mundo. Los usuarios pueden capturar fotos con la cámara de su dispositivo, añadir su nombre, un comentario y su ubicación GPS, y ver las aventuras de otros viajeros en una galería.
 
-🌐 **Demo en producción:** [deveps.ddns.net/gafasviajeras](https://deveps.ddns.net/gafasviajeras)
 
 ---
 
@@ -288,7 +287,6 @@ frontend/src/
 **DevEps** - Desarrollador Full Stack
 
 - GitHub: [github.com/devepsdev](https://github.com/devepsdev)
-- Portfolio: [deveps.ddns.net](https://deveps.ddns.net)
 - Email: devepsdev@gmail.com
 - LinkedIn: [www.linkedin.com/in/enrique-perez-sanchez](https://www.linkedin.com/in/enrique-perez-sanchez/)
 
